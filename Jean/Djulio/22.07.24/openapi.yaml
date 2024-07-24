@@ -1,0 +1,158 @@
+openapi: 3.0.3
+info:
+  title: API Biblioteca - OpenAPI 3.0
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: Biblio@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://localhost
+servers:
+  - url: https://biblioteca
+tags:
+  - name: /Livros
+    description: Lista de livros
+    externalDocs: 
+      description: Mais livros
+      url: http://biblioteca/livros
+paths:
+  /Livros:
+    get:
+      summary: Lista
+      responses:
+        '200':
+          description: 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    Nome:
+                      type: string
+                      example: Manoel
+                    Titulo:
+                      type: string
+                      example: Titulo
+
+    post:
+      summary: Adicionar Livro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Nome:
+                  type: string
+                  example: "Livros do balaco baco"
+                Titulo:
+                  type: string
+                  example: "Titulo"
+                Ano:
+                  type: integer
+                  example: 1999
+      responses:
+        '200':
+          description: Sucesso ao adicionar livro
+        '400':
+          description: Requisição inválida
+          
+  /livro{Id}:
+    get:
+      summary: Livro por ID
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Sucesso ao obter livro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Nome:
+                    type: string
+                    example: "Livros do balaco baco"
+                  Titulo:
+                    type: string
+                    example: "Titulo"
+                  Ano:
+                    type: integer
+                    example: 1999
+        '400':
+          description: Requisição inválida
+          
+  /livro/{Id}:
+    put:
+      summary: Atualizar Livro por ID
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Nome:
+                  type: string
+                  example: "Novo Nome do Livro"
+                Titulo:
+                  type: string
+                  example: "Novo Título"
+                Ano:
+                  type: integer
+                  example: 2000
+      responses:
+        '200':
+          description: Livro atualizado com sucesso
+        '404':
+          description: Livro não encontrado
+        '400':
+          description: Requisição inválida
+      
+          
+          
+          
+    /livro/{Id}:
+      delete:
+        summary: Remover Livro por ID
+        parameters:
+          - name: Id
+            in: path
+            required: true
+            schema:
+              type: integer
+              example: 1
+        responses:
+          '204':
+            description: Livro removido com sucesso
+          '404':
+            description: Livro não encontrado
+          '400':
+            description: Requisição inválida
+          
+
+    
+
+                     
